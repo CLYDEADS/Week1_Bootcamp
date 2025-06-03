@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile with Blue Stars</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e0f7fa;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+        .star {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #007BFF; /* Blue color */
+            clip-path: polygon(
+                50% 0%,
+                61% 35%,
+                98% 35%,
+                68% 57%,
+                79% 91%,
+                50% 70%,
+                21% 91%,
+                32% 57%,
+                2% 35%,
+                39% 35%
+            );
+            opacity: 0.6;
+            animation: float 8s linear infinite;
+            z-index: 0;
+        }
+
+        .star1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .star2 {
+            bottom: 15%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .star3 {
+            top: 30%;
+            right: 30%;
+            animation-delay: 4s;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 360px);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info {
+            font-size: 22px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Blue Stars -->
+    <div class="star star1"></div>
+    <div class="star star2"></div>
+    <div class="star star3"></div>
+
+    <div class="header">
+        <div class="logout">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        {% if image %}
+            <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Profile Image" class="profile-img">
+        {% endif %}
+    </div>
+
+    <div class="content">
+        <div class="info">
+            <h2>Welcome, {{ name }}!</h2>
+            <p><strong>Age:</strong> {{ age }}</p>
+            <p><strong>Address:</strong> {{ address }}</p>
+        </div>
+    </div>
+
+</body>
+</html>
